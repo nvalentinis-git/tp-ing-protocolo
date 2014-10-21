@@ -15,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="PERSON")
-public class Person {
+public class Measurement {
 
 	@Id
 	@Column(name="id")
