@@ -1,12 +1,17 @@
 package com.journaldev.spring;
 
+import com.journaldev.spring.dao.MeasurementDAO;
 import com.journaldev.spring.model.Measurement;
 import com.journaldev.spring.service.MeasurementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,14 +36,14 @@ public class MeasurementController {
 	
 	//For add and update measurement both
 	@RequestMapping(value= "/measurement/add", method = RequestMethod.POST)
-	public String addMeasurement(@ModelAttribute("measurement") Measurement p){
+	public String addMeasurement(@ModelAttribute("measurement") Measurement m){
 		
-		if(p.getId() == 0){
+		if(m.getId() == 0){
 			//new measurement, add it
-			this.measurementService.addMeasurement(p);
+			this.measurementService.addMeasurement(m);
 		}else{
 			//existing measurement, call update
-			this.measurementService.updateMeasurement(p);
+			this.measurementService.updateMeasurement(m);
 		}
 		
 		return "redirect:/home";
@@ -58,5 +63,11 @@ public class MeasurementController {
         model.addAttribute("listMeasurements", this.measurementService.listMeasurement());
         return "measurement";
     }
-	
+
+    @RequestMapping(value = "/data", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public void saveData(@RequestBody Measurement measurement) {
+
+        this.measurementService.addMeasurement(measurement);
+    }
 }
