@@ -3,6 +3,8 @@ package com.journaldev.spring;
 import com.journaldev.spring.dao.MeasurementDAO;
 import com.journaldev.spring.model.Measurement;
 import com.journaldev.spring.service.MeasurementService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
@@ -20,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MeasurementController {
 	
 	private MeasurementService measurementService;
-	
-	@Autowired(required=true)
+    private static final Logger logger = LoggerFactory.getLogger(MeasurementController.class);
+
+
+    @Autowired(required=true)
 	@Qualifier(value="measurementService")
 	public void setMeasurementService(MeasurementService ps){
 		this.measurementService = ps;
@@ -68,6 +72,7 @@ public class MeasurementController {
     @ResponseStatus(HttpStatus.OK)
     public void saveData(@RequestBody Measurement measurement) {
 
+        logger.info(measurement.toString());
         this.measurementService.addMeasurement(measurement);
     }
 }

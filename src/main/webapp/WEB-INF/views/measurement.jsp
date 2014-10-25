@@ -21,7 +21,7 @@
 
 <form:form action="${addAction}" commandName="measurement">
 <table>
-	<c:if test="${!empty measurement.name}">
+	<c:if test="${!empty measurement.anio}">
 	<tr>
 		<td>
 			<form:label path="id">
@@ -36,31 +36,31 @@
 	</c:if>
 	<tr>
 		<td>
-			<form:label path="name">
-				<spring:message text="Name"/>
+			<form:label path="anio">
+				<spring:message text="Anio"/>
 			</form:label>
 		</td>
 		<td>
-			<form:input path="name" />
+			<form:input path="anio" />
 		</td> 
 	</tr>
 	<tr>
 		<td>
-			<form:label path="country">
-				<spring:message text="Country"/>
+			<form:label path="mes">
+				<spring:message text="Mes"/>
 			</form:label>
 		</td>
 		<td>
-			<form:input path="country" />
+			<form:input path="mes" />
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			<c:if test="${!empty measurement.name}">
+			<c:if test="${!empty measurement.anio}">
 				<input type="submit"
 					value="<spring:message text="Edit Measurement"/>" />
 			</c:if>
-			<c:if test="${empty measurement.name}">
+			<c:if test="${empty measurement.anio}">
 				<input type="submit"
 					value="<spring:message text="Add Measurement"/>" />
 			</c:if>
@@ -69,21 +69,33 @@
 </table>	
 </form:form>
 <br>
-<h3>Measurements List</h3>
+<h3>Lista de Mediciones</h3>
 <c:if test="${!empty listMeasurements}">
 	<table class="tg">
 	<tr>
 		<th width="80">ID</th>
-		<th width="120">Name</th>
-		<th width="120">Country</th>
+		<th width="120">ANIO</th>
+		<th width="120">MES</th>
+		<th width="120">DIA</th>
+		<th width="120">HORA</th>
+		<th width="120">MINUTO</th>
+		<th width="120">SEGUNDOS</th>
+		<th width="120">SENSOR</th>
+		<th width="120">VALOR</th>
 		<th width="60">Edit</th>
 		<th width="60">Delete</th>
 	</tr>
 	<c:forEach items="${listMeasurements}" var="measurement">
 		<tr>
 			<td>${measurement.id}</td>
-			<td>${measurement.name}</td>
-			<td>${measurement.country}</td>
+			<td>${measurement.anio}</td>
+			<td>${measurement.mes}</td>
+			<td>${measurement.dia}</td>
+			<td>${measurement.hora}</td>
+			<td>${measurement.minuto}</td>
+			<td>${measurement.segundo}</td>
+			<td>${measurement.sensor}</td>
+			<td>${measurement.valor}</td>
 			<td><a href="<c:url value='/edit/${measurement.id}' />" >Edit</a></td>
 			<td><a href="<c:url value='/remove/${measurement.id}' />" >Delete</a></td>
 		</tr>
