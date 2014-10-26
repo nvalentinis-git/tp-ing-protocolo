@@ -161,7 +161,13 @@
             <version>1.4.182</version>
         </dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+
+    </dependencies>
     <build>
         <plugins>
 
@@ -169,6 +175,12 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
+                <configuration>
+                    <systemProperties>
+                        <JAVA_OPTS>-Xdebug</JAVA_OPTS>
+                        <JAVA_OPTS>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</JAVA_OPTS>
+                    </systemProperties>
+                </configuration>
             </plugin>
 
             <plugin>

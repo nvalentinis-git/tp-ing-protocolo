@@ -36,6 +36,10 @@
 		<level value="info" />
 	</logger>
 
+    <logger name="com.server.tcp">
+        <level value="info" />
+    </logger>
+
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />
