@@ -19,10 +19,17 @@
 	</style>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Spring pagination using data tables</title>
+
+    <link rel="stylesheet" type="text/css" href="/TP-IngProtocolo/resources/assets//jquery.dataTables.css">
+    <script type="text/javascript" src="/TP-IngProtocolo/resources/assets/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/TP-IngProtocolo/resources/assets/jquery.dataTables.js"></script>
+
+<!--
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.3/css/jquery.dataTables.css">
     <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.js"></script>
+-->
+
     <script type="text/javascript">
 
     $(document).ready(function() {
@@ -34,6 +41,9 @@
         } );
 
         $("#example").dataTable( {
+            "language": {
+                        "url": "/TP-IngProtocolo/resources/assets/Spanish.json"
+                    },
             "bProcessing": false,
             "bServerSide": false,
             "sort": "id",
@@ -206,6 +216,7 @@
 
 <!-- Modulo Lista Dinamica -->
 
+    <br/>
     <form:form action="" method="GET">
     <h2 >Lista de Mediciones<br></h2>
     <table width="100%" style="border: 3px;background: rgb(243, 244, 248);"><tr><td>
