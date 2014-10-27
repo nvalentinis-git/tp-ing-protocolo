@@ -16,6 +16,43 @@
                 padding: 3px;
                 box-sizing: border-box;
             }
+
+         table#estado thead tr th {
+            border: medium solid;
+         }
+
+         table#estado tbody tr th {
+             background: rgb(247,251,252); /* Old browsers */
+             background: -moz-linear-gradient(-45deg,  rgba(247,251,252,1) 0%, rgba(217,237,242,1) 40%, rgba(173,217,228,1) 100%); /* FF3.6+ */
+             background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(247,251,252,1)), color-stop(40%,rgba(217,237,242,1)), color-stop(100%,rgba(173,217,228,1))); /* Chrome,Safari4+ */
+             background: -webkit-linear-gradient(-45deg,  rgba(247,251,252,1) 0%,rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%); /* Chrome10+,Safari5.1+ */
+             background: -o-linear-gradient(-45deg,  rgba(247,251,252,1) 0%,rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%); /* Opera 11.10+ */
+             background: -ms-linear-gradient(-45deg,  rgba(247,251,252,1) 0%,rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%); /* IE10+ */
+             background: linear-gradient(135deg,  rgba(247,251,252,1) 0%,rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%); /* W3C */
+             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7fbfc', endColorstr='#add9e4',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+          }
+
+          .incative {
+                background: rgb(245,246,246); /* Old browsers */
+                background: -moz-linear-gradient(-45deg,  rgba(245,246,246,1) 0%, rgba(219,220,226,1) 21%, rgba(184,186,198,1) 49%, rgba(221,223,227,1) 80%, rgba(245,246,246,1) 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(245,246,246,1)), color-stop(21%,rgba(219,220,226,1)), color-stop(49%,rgba(184,186,198,1)), color-stop(80%,rgba(221,223,227,1)), color-stop(100%,rgba(245,246,246,1))); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(-45deg,  rgba(245,246,246,1) 0%,rgba(219,220,226,1) 21%,rgba(184,186,198,1) 49%,rgba(221,223,227,1) 80%,rgba(245,246,246,1) 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(-45deg,  rgba(245,246,246,1) 0%,rgba(219,220,226,1) 21%,rgba(184,186,198,1) 49%,rgba(221,223,227,1) 80%,rgba(245,246,246,1) 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(-45deg,  rgba(245,246,246,1) 0%,rgba(219,220,226,1) 21%,rgba(184,186,198,1) 49%,rgba(221,223,227,1) 80%,rgba(245,246,246,1) 100%); /* IE10+ */
+                background: linear-gradient(135deg,  rgba(245,246,246,1) 0%,rgba(219,220,226,1) 21%,rgba(184,186,198,1) 49%,rgba(221,223,227,1) 80%,rgba(245,246,246,1) 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+          }
+
+          body {
+            background: rgb(226,226,226); /* Old browsers */
+            background: -moz-linear-gradient(45deg,  rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), color-stop(51%,rgba(209,209,209,1)), color-stop(100%,rgba(254,254,254,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(45deg,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(45deg,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(45deg,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%); /* IE10+ */
+            background: linear-gradient(45deg,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+          }
 	</style>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -63,7 +100,7 @@
         } );
 
         // DataTable
-        var table = $('#example').DataTable();
+        table = $('table table#example').DataTable();
 
         // Apply the search
         table.columns().eq( 0 ).each( function ( colIdx ) {
@@ -75,7 +112,7 @@
             } );
         } );
 
-
+     // Funcion para actualizar el estadado de los Sensores
      function getNetState() {
 
           var netState = "http://localhost:8080/TP-IngProtocolo/netState";
@@ -88,7 +125,7 @@
 
               if(data.acumulador.state) {
 
-                  $( "table#estado tbody tr th div#divac" ).css("border","medium solid blue");
+                  $( "table#estado tbody tr th div#divac" ).css("border","medium solid green");
                   $( "table#estado tbody tr th div#divac p div#estado" ).add("Activo");
                   $( "table#estado tbody tr th div#divac p div#ip" ).add(data.acumulador.ip);
                   $( "table#estado tbody tr th div#divac p div#puerto" ).add(data.acumulador.port);
@@ -97,12 +134,12 @@
 
                     selector = "table#estado tbody tr th div#div" + i;
                     if (item.state) {
-                        $( selector ).css("border","medium solid blue");
+                        $( selector ).css("border","medium solid green");
                         $( selector + " div#estado" ).text("Estado: Activo");
                         $( selector + " div#ip" ).text("IP: " + item.ip);
                         $( selector + " div#puerto" ).text("Puerto: " + item.port);
                     } else {
-                        $( selector ).css("border","medium solid red");
+                        $( selector ).css("border","medium solid red").addClass("incative");
                         $( selector + " div#estado" ).text("Estato: Inactivo");
                     }
 
