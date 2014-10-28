@@ -60,6 +60,8 @@
     <link rel="stylesheet" type="text/css" href="/TP-IngProtocolo/resources/assets//jquery.dataTables.css">
     <script type="text/javascript" src="/TP-IngProtocolo/resources/assets/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="/TP-IngProtocolo/resources/assets/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="/TP-IngProtocolo/resources/assets/jquery.dataTables.columnFilter.js"></script>
+
 
 <!--
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.3/css/jquery.dataTables.css">
@@ -71,12 +73,7 @@
 
     $(document).ready(function() {
 
-        // Setup - add a text input to each footer cell
-        $('#example tfoot th').each( function () {
-            var title = $('#example thead th').eq( $(this).index() ).text();
-            $(this).html( '<input type="text" style="width: 100px;" placeholder="'+title+'" />' );
-        } );
-
+        // Funcion para cargar la tabla de datos
         $("#example").dataTable( {
             "language": {
                         "url": "/TP-IngProtocolo/resources/assets/Spanish.json"
@@ -85,6 +82,8 @@
             "bServerSide": false,
             "sort": "id",
             "sAjaxSource": "dataJson",
+            "bFilter": false,
+                    "bInfo": false,
             "aoColumns": [
                 { "mData": "id" },
                 { "mData": "anio" },
@@ -97,20 +96,8 @@
                 { "mData": "valor" }
 
             ]
-        } );
+        } ).columnFilter();;
 
-        // DataTable
-        table = $('table table#example').DataTable();
-
-        // Apply the search
-        table.columns().eq( 0 ).each( function ( colIdx ) {
-            $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
-                table
-                    .column( colIdx )
-                    .search( this.value )
-                    .draw();
-            } );
-        } );
 
      // Funcion para actualizar el estadado de los Sensores
      function getNetState() {
@@ -256,7 +243,7 @@
     <br/>
     <form:form action="" method="GET">
     <h2 >Lista de Mediciones<br></h2>
-    <table width="100%" style="border: 3px;background: rgb(243, 244, 248);"><tr><td>
+    <table width="90%" style="border: 3px;background: rgb(243, 244, 248); margin-left: 5%;"><tr><td>
         <table id="example" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>
@@ -391,6 +378,11 @@
     </c:if>
 -->
 
+<footer>
+<br/>
+<br/>
+<br/>
+</footer>
 
 </body>
 </html>
