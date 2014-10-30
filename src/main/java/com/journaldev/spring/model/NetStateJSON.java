@@ -5,6 +5,7 @@ import java.util.List;
 
 public class NetStateJSON {
 
+    private Sensor server = new Sensor();
     private Sensor acumulador = new Sensor();
     private List<Sensor> sensors = new ArrayList<Sensor>();
 
@@ -14,6 +15,14 @@ public class NetStateJSON {
 
     public void setSensors(List<Sensor> sensors) {
         this.sensors = sensors;
+    }
+
+    public Sensor getServer() {
+        return server;
+    }
+
+    public void setServer(Sensor server) {
+        this.server = server;
     }
 
     public Sensor getAcumulador() {

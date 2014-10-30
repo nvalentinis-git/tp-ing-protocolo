@@ -112,10 +112,17 @@
 
               if(data.acumulador.state) {
 
-                  $( "table#estado tbody tr th div#divac" ).css("border","medium solid green");
-                  $( "table#estado tbody tr th div#divac p div#estado" ).add("Activo");
-                  $( "table#estado tbody tr th div#divac p div#ip" ).add(data.acumulador.ip);
-                  $( "table#estado tbody tr th div#divac p div#puerto" ).add(data.acumulador.port);
+                  // actualizar server
+                  $( "table#estado tbody tr th div#divServ" ).css("border","medium solid green");
+                  $( "table#estado tbody tr th div#divServ div#estado" ).text("Estado: Activo");
+                  $( "table#estado tbody tr th div#divServ div#ip" ).text("IP: " + data.server.ip);
+                  $( "table#estado tbody tr th div#divServ div#puerto").text("Puerto: " + data.server.port);
+
+                  // acutualizar acumulador
+                  $( "table#estado tbody tr th div#divAc" ).css("border","medium solid green");
+                  $( "table#estado tbody tr th div#divAc div#estado" ).text("Estado: Activo");
+                  $( "table#estado tbody tr th div#divAc div#ip" ).text("IP: " + data.acumulador.ip);
+                  $( "table#estado tbody tr th div#divAc div#puerto").text("Puerto: " + data.acumulador.port);
 
                   $.each( data.sensors, function( i, item ) {
 
@@ -159,19 +166,28 @@
            <table id="estado" class="display" cellspacing="0" width="100%">
                <thead>
                    <tr>
+                       <th>Server Web/BD</th>
                        <th>Acumulador</th>
                        <th>Sensor 1</th>
                        <th>Sensor 2</th>
                        <th>Sensor 3</th>
                        <th>Sensor 4</th>
-                       <th>Sensor 5</th>
                    </tr>
                </thead>
 
-
                <tbody>
                    <tr>
-                       <th>
+                       <th style="width: 220px;">
+                            <div id="divServ" style="text-align: left; border: medium solid red;">
+                               <br/>
+                               <div id="estado">Estado:</div>
+                               <br/>
+                               <div id="ip">IP:</div>
+                               <br/>
+                               <div id="puerto">Puerto:</div>
+                            </div>
+                       </th>
+                       <th style="width: 220px;">
                             <div id="divAc" style="text-align: left; border: medium solid red;">
                                 <br/>
                                 <div id="estado">Estado:</div>
@@ -221,16 +237,7 @@
                                 <div id="puerto">Puerto:</div>
                            </div>
                        </th>
-                       <th>
-                           <div id="div4" style="text-align: left; border: medium solid red;">
-                                <br/>
-                                <div id="estado">Estado:</div>
-                                <br/>
-                                <div id="ip">IP:</div>
-                                <br/>
-                                <div id="puerto">Puerto:</div>
-                           </div>
-                       </th>
+
                    </tr>
                <tbody>
 
