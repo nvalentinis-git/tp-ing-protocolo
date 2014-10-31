@@ -116,13 +116,13 @@
                   $( "table#estado tbody tr th div#divServ" ).css("border","medium solid green");
                   $( "table#estado tbody tr th div#divServ div#estado" ).text("Estado: Activo");
                   $( "table#estado tbody tr th div#divServ div#ip" ).text("IP: " + data.server.ip);
-                  $( "table#estado tbody tr th div#divServ div#puerto").text("Puerto: " + data.server.port);
+                  $( "table#estado tbody tr th div#divServ div#host").text("Host: " + data.server.name);
 
                   // acutualizar acumulador
                   $( "table#estado tbody tr th div#divAc" ).css("border","medium solid green");
                   $( "table#estado tbody tr th div#divAc div#estado" ).text("Estado: Activo");
                   $( "table#estado tbody tr th div#divAc div#ip" ).text("IP: " + data.acumulador.ip);
-                  $( "table#estado tbody tr th div#divAc div#puerto").text("Puerto: " + data.acumulador.port);
+                  $( "table#estado tbody tr th div#divAc div#host").text("Host: " + data.acumulador.name);
 
                   $.each( data.sensors, function( i, item ) {
 
@@ -131,7 +131,7 @@
                         $( selector ).css("border","medium solid green");
                         $( selector + " div#estado" ).text("Estado: Activo");
                         $( selector + " div#ip" ).text("IP: " + item.ip);
-                        $( selector + " div#puerto" ).text("Puerto: " + item.port);
+                        $( selector + " div#host" ).text("Host: " + item.name);
                     } else {
                         $( selector ).css("border","medium solid red").addClass("incative");
                         $( selector + " div#estado" ).text("Estato: Inactivo");
@@ -148,7 +148,7 @@
 
      getNetState();
 
-     setInterval( getNetState, 3000 );
+     setInterval( getNetState, 5000 );
 
     } );
 
@@ -184,7 +184,7 @@
                                <br/>
                                <div id="ip">IP:</div>
                                <br/>
-                               <div id="puerto">Puerto:</div>
+                               <div id="host">Host:</div>
                             </div>
                        </th>
                        <th style="width: 220px;">
@@ -194,7 +194,7 @@
                                 <br/>
                                 <div id="ip">IP:</div>
                                 <br/>
-                                <div id="puerto">Puerto:</div>
+                                <div id="host">Host:</div>
                             </div>
                        </th>
                        <th>
@@ -204,7 +204,7 @@
                                 <br/>
                                 <div id="ip">IP:</div>
                                 <br/>
-                                <div id="puerto">Puerto:</div>
+                                <div id="host">Host:</div>
                             </div>
                        </th>
                        <th>
@@ -214,7 +214,7 @@
                                 <br/>
                                 <div id="ip">IP:</div>
                                 <br/>
-                                <div id="puerto">Puerto:</div>
+                                <div id="host">Host:</div>
                             </div>
                        </th>
                        <th>
@@ -224,7 +224,7 @@
                                 <br/>
                                 <div id="ip">IP:</div>
                                 <br/>
-                                <div id="puerto">Puerto:</div>
+                                <div id="host">Host:</div>
                            </div>
                        </th>
                        <th>
@@ -234,7 +234,7 @@
                                 <br/>
                                 <div id="ip">IP:</div>
                                 <br/>
-                                <div id="puerto">Puerto:</div>
+                                <div id="host">Host:</div>
                            </div>
                        </th>
 

@@ -32,8 +32,9 @@ import java.util.Map;
 @Controller
 public class MeasurementController {
 
-    public static final String ACUMULADOR_HOSTNAME = "192.168.1.8";
-    public static final int ACUMULADOR_PORT = 8888;
+    public static final String ACUMULADOR_HOSTNAME = "192.168.1.9";
+    public static final int ACUMULADOR_PORT = 4444;
+    public static final int SERVER_PORT = 8080;
     private MeasurementService measurementService;
     private static final Logger logger = LoggerFactory.getLogger(MeasurementController.class);
 
@@ -104,7 +105,7 @@ public class MeasurementController {
     @RequestMapping(value = "/netState", method = RequestMethod.GET, produces ="application/json")
     public @ResponseBody NetStateJSON netStateJson () throws IOException {
 
-        boolean _DEBUG = true;
+        boolean _DEBUG = false;
 
         String response = "error";
         NetStateJSON netStateJSON = new NetStateJSON();
@@ -112,12 +113,14 @@ public class MeasurementController {
         //valores Server
         netStateJSON.getServer().setState(true);
         netStateJSON.getServer().setIp(getIp());
-        netStateJSON.getServer().setPort(String.valueOf(8080));
+        netStateJSON.getServer().setPort(String.valueOf(SERVER_PORT));
+        netStateJSON.getServer().setName("Linux-pc");
 
         // valores acumulador por defecto
         netStateJSON.getAcumulador().setState(false);
         netStateJSON.getAcumulador().setIp(ACUMULADOR_HOSTNAME);
         netStateJSON.getAcumulador().setPort(String.valueOf(ACUMULADOR_PORT));
+        netStateJSON.getAcumulador().setName("RaspberryPi");
 
         if (!_DEBUG) {
 
@@ -150,16 +153,32 @@ public class MeasurementController {
                 inputStreamTCPServer.close();
                 sensorTCPSocket.close();
 
+                logger.info(response);
+
                 netStateJSON = new Gson().fromJson(response, NetStateJSON.class);
                 netStateJSON.getAcumulador().setState(true);
 
+                // valores acumulador por defecto
+                netStateJSON.getAcumulador().setState(true);
+                netStateJSON.getAcumulador().setIp(ACUMULADOR_HOSTNAME);
+                netStateJSON.getAcumulador().setPort(String.valueOf(ACUMULADOR_PORT));
+                netStateJSON.getAcumulador().setName("RaspberryPi");
+
             } catch (Exception e) {
                 e.printStackTrace(System.out);
+
+            } finally {
+                //valores Server
+                netStateJSON.getServer().setState(true);
+                netStateJSON.getServer().setIp(getIp());
+                netStateJSON.getServer().setPort(String.valueOf(ACUMULADOR_PORT));
+                netStateJSON.getServer().setName("Linux-pc");
             }
 
         } else { // Datos de prueba
 
             netStateJSON.getAcumulador().setState(true);
+            netStateJSON.getAcumulador().setName("RaspberryPi");
 
             Sensor sensor = new Sensor();
             sensor.setIp("192.2.2.1");
@@ -189,6 +208,15 @@ public class MeasurementController {
             netStateJSON.getSensors().add(sensor2);
             netStateJSON.getSensors().add(sensor3);
             netStateJSON.getSensors().add(sensor4);
+        }
+
+        // limpiar sensores inactivos
+        for (Sensor s : netStateJSON.getSensors()) {
+            if (!s.isState()) {
+                s.setPort("");
+                s.setName("");
+                s.setIp("");
+            }
         }
 
         return  netStateJSON;
